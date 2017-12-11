@@ -17,13 +17,6 @@ namespace MVC5Demo.UI.Controllers
             context = new ApplicationDbContext();
         }
 
-
-        // GET: ManageUsers
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         public ActionResult UsersWithRoles()
         {
             var usersWithRoles = (from user in context.Users
@@ -33,7 +26,8 @@ namespace MVC5Demo.UI.Controllers
                                       Username = user.UserName,
                                       Email = user.Email,
                                       RoleNames = (from userRole in user.Roles
-                                                   join role in context.Roles on userRole.RoleId equals role.Id
+                                                   join role in context.Roles on userRole.RoleId 
+                                                   equals role.Id
                                                    select role.Name).ToList()
                                   }).ToList().Select(p => new Users_in_Role_ViewModel()
 

@@ -2,22 +2,18 @@
 @model IEnumerable<MVC5Demo.UI.ViewModels.Users_in_Role_ViewModel>
 
 @{
-    ViewBag.Title = "UsersWithRoles";
+    ViewBag.Title = "Users With Roles";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="box">
-    <div class="box-header">
-        <h3 class="box-title"><b>Total Users till @String.Format("{0 : dddd, MMMM d, yyyy}", DateTime.Now)  :</b><span class="label label-primary">@Model.Count()</span></h3>
-        <div class="pull-right">
-            <a href="@Url.Action("Register", "Account", new { area =""})" class="btn btn-primary">
-                <i class="glyphicon glyphicon-plus">&nbsp;</i>Add New User
-            </a>
-
-        </div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="box-title">
+            <b>Users with Roles</b>
+        </h3>
     </div>
     <!-- /.box-header -->
-    <div class="box-body">
+    <div class="panel-body">
         <table class="table table-hover table-bordered table-condensed" id="example1">
             <thead>
                 <tr>
@@ -37,7 +33,25 @@
             }
         </table>
     </div>
+
+    <div class="panel-footer">
+        <p class="box-title"><b>Total Users till @String.Format("{0 : dddd, MMMM d, yyyy}", DateTime.Now)  : </b><span class="label label-primary">@Model.Count()</span></p>
+    </div>
 </div>
 
 
-
+@section scripts{
+    <script>
+        $(function () {
+            $("#example1").DataTable();
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true
+            });
+        });
+    </script>
+}
